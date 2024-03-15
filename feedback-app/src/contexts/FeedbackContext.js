@@ -19,7 +19,11 @@ const FeedbackProvider = ({ children }) => {
     item: {},
     edit: false,
   })
-
+  
+  useEffect(() => {
+    fetchFeedbackData()
+  }, [])
+  
   // Fetch the feedback data from json-server
   const fetchFeedbackData = async () => {
     const res = await fetch(
@@ -29,9 +33,6 @@ const FeedbackProvider = ({ children }) => {
     setFeedbacks(data)
   }
 
-  useEffect(() => {
-    fetchFeedbackData()
-  }, [])
 
   // setting the feedback item to be edited
   const handleEdit = (feedback) => {
