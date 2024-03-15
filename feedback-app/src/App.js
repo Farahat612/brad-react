@@ -26,7 +26,7 @@ function App() {
       <Header />
       <div className='container'>
         <FeedbackForm />
-        <FeedbackStats feedbacks={feedbacks} />
+        <FeedbackStats />
         <FeedbackList/>
       </div>
     </FeedbackProvider>
