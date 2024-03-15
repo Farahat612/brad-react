@@ -9,7 +9,8 @@ const FeedbackStats = ({ feedbacks }) => {
     <div className='feedback-stats'>
       <h4>{feedbacks.length} reviews</h4>
       <h4>
-        {ratingsAverage.toFixed(1)} /10 stars average rating 
+        {isNaN(ratingsAverage) ? 0 : ratingsAverage.toFixed(1)} 
+        /10 stars average rating
       </h4>
     </div>
   )
