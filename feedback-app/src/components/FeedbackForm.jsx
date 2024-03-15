@@ -4,6 +4,7 @@ import Button from './shared/Button'
 
 const FeedbackForm = () => {
   const [text, setText] = useState('')
+  const [rating, setRating] = useState(0)
   const [btnDisabled, setBtnDisabled] = useState(true)
   const [message, setMessage] = useState('')
 
