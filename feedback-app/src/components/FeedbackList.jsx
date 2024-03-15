@@ -1,4 +1,5 @@
 import FeedbackItem from './FeedbackItem'
+import Spinner from './shared/Spinner'
 // import PropTypes from 'prop-types'
 import { motion, AnimatePresence } from 'framer-motion'
 
@@ -12,7 +13,7 @@ const FeedbackList = () => {
     return <h2>No feedbacks available</h2>
   }
   return isLoading ? (
-    <h2>Loading...</h2>
+    <Spinner />
   ) : (
     <div className='feedback-list'>
       <AnimatePresence>
