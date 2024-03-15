@@ -4,6 +4,7 @@ const FeedbackContext = createContext()
 
 const FeedbackProvider = ({ children }) => {
   const [feedbacks, setFeedbacks] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
 
   const handleDelete = (id) => {
     if (window.confirm('Are you sure you want to delete this feedback?')) {
@@ -31,6 +32,7 @@ const FeedbackProvider = ({ children }) => {
     )
     const data = await res.json()
     setFeedbacks(data)
+    setIsLoading(false)
   }
 
 
@@ -58,6 +60,7 @@ const FeedbackProvider = ({ children }) => {
         handleEdit,
         feedbackEdit,
         handleUpdate,
+        isLoading,
       }}
     >
       {children}
