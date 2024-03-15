@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types'
+
 const Header = (text) => {
   return (
     <header>
@@ -11,4 +13,9 @@ const Header = (text) => {
 Header.defaultProps = {
   text: 'Feedback App UI',
 }
+
+Header.propTypes = {
+  text: PropTypes.string,
+}
+
 export default Header
