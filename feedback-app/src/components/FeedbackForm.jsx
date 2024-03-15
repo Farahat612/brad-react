@@ -3,7 +3,7 @@
 const FeedbackForm = () => {
   return (
     <div>
-      
+      Form
     </div>
   )
 }
