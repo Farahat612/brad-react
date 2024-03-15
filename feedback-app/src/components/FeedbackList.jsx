@@ -1,5 +1,5 @@
 import FeedbackItem from './FeedbackItem'
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
 import { motion, AnimatePresence } from 'framer-motion'
 
 import { useContext } from 'react'
@@ -23,6 +23,7 @@ const FeedbackList = () => {
           >
             <FeedbackItem
               key={feedback.id}
+              feedback={feedback}
             />
           </motion.div>
         ))}
@@ -40,9 +41,9 @@ const FeedbackList = () => {
   )
 }
 
-FeedbackList.propTypes = {
-  feedbacks: PropTypes.array.isRequired,
-  deleteFeedback: PropTypes.func.isRequired,
-}
+// FeedbackList.propTypes = {
+//   feedbacks: PropTypes.array.isRequired,
+//   deleteFeedback: PropTypes.func.isRequired,
+// }
 
 export default FeedbackList
