@@ -12,7 +12,7 @@ const FeedbackProvider = ({ children }) => {
   }
 
   const handleAdd = (newFeedback) => {
-    setFeedbacks([...feedbacks, newFeedback])
+    setFeedbacks([newFeedback, ...feedbacks])
   }
 
   const [feedbackEdit, setFeedbackEdit] = useState({
@@ -28,7 +28,9 @@ const FeedbackProvider = ({ children }) => {
   // updating the feedback item
   const handleUpdate = (id, updatedFeedback) => {
     setFeedbacks(
-      feedbacks.map((feedback) => (feedback.id === id ? updatedFeedback : feedback))
+      feedbacks.map((feedback) =>
+        feedback.id === id ? updatedFeedback : feedback
+      )
     )
     setFeedbackEdit({ item: {}, edit: false })
   }
