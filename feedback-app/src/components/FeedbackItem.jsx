@@ -17,6 +17,7 @@ const FeedbackItem = ({feedback, deleteFeedback}) => {
 
 FeedbackItem.propTypes = {
   feedback: PropTypes.object.isRequired,
+  deleteFeedback: PropTypes.func.isRequired,
 }
 
 export default FeedbackItem

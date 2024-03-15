@@ -18,6 +18,7 @@ const FeedbackList = ({feedbacks, deleteFeedback}) => {
 
 FeedbackList.propTypes = {
   feedbacks: PropTypes.array.isRequired,
+  deleteFeedback: PropTypes.func.isRequired,
 }
 
 export default FeedbackList
