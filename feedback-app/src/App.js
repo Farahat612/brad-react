@@ -1,12 +1,14 @@
 import './App.css';
+import Header from './components/Header';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Feedback App</h1>
-      </header>
-    </div>
+    <>
+      <Header />
+      <div className="container">
+        <h1>My App</h1>
+      </div>
+    </>
   );
 }
 
