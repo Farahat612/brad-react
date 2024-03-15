@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 
-const Header = (text) => {
+const Header = ({text}) => {
   return (
     <header>
       <div className='container'>
