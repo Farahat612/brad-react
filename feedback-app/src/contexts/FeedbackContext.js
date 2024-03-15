@@ -1,9 +1,9 @@
-import { createContext, useState } from 'react'
-import FeedbackData from '../data/FeedbackData'
+import { createContext, useState, useEffect } from 'react'
+// import FeedbackData from '../data/FeedbackData'
 const FeedbackContext = createContext()
 
 const FeedbackProvider = ({ children }) => {
-  const [feedbacks, setFeedbacks] = useState(FeedbackData)
+  const [feedbacks, setFeedbacks] = useState([])
 
   const handleDelete = (id) => {
     if (window.confirm('Are you sure you want to delete this feedback?')) {
@@ -19,6 +19,19 @@ const FeedbackProvider = ({ children }) => {
     item: {},
     edit: false,
   })
+
+  // Fetch the feedback data from json-server
+  const fetchFeedbackData = async () => {
+    const res = await fetch(
+      'http://localhost:6000/feedback?_sort=id&_order=desc'
+    )
+    const data = await res.json()
+    setFeedbacks(data)
+  }
+
+  useEffect(() => {
+    fetchFeedbackData()
+  }, [])
 
   // setting the feedback item to be edited
   const handleEdit = (feedback) => {
