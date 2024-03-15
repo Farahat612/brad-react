@@ -2,7 +2,11 @@ import React from 'react'
 
 const FeedbackItem = () => {
   return (
-    <div>
+    <div className='card'>
+      <div className="num-display">10</div>
+      <div className="text-display">
+        Just example
+      </div>
       
     </div>
   )
