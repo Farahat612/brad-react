@@ -2,7 +2,12 @@ import FeedbackItem from './FeedbackItem'
 import PropTypes from 'prop-types'
 import { motion, AnimatePresence } from 'framer-motion'
 
-const FeedbackList = ({ feedbacks, deleteFeedback }) => {
+import { useContext } from 'react'
+import FeedbackContext from '../contexts/FeedbackContext'
+
+const FeedbackList = () => {
+  const { feedbacks } = useContext(FeedbackContext)
+
   if (!feedbacks || feedbacks.length === 0) {
     return <h2>No feedbacks available</h2>
   }
@@ -18,8 +23,6 @@ const FeedbackList = ({ feedbacks, deleteFeedback }) => {
           >
             <FeedbackItem
               key={feedback.id}
-              feedback={feedback}
-              deleteFeedback={deleteFeedback}
             />
           </motion.div>
         ))}
