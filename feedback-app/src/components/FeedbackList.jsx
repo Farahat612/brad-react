@@ -6,12 +6,14 @@ import { useContext } from 'react'
 import FeedbackContext from '../contexts/FeedbackContext'
 
 const FeedbackList = () => {
-  const { feedbacks } = useContext(FeedbackContext)
+  const { feedbacks, isLoading } = useContext(FeedbackContext)
 
-  if (!feedbacks || feedbacks.length === 0) {
+  if (!isLoading && (!feedbacks || feedbacks.length === 0)) {
     return <h2>No feedbacks available</h2>
   }
-  return (
+  return isLoading ? (
+    <h2>Loading...</h2>
+  ) : (
     <div className='feedback-list'>
       <AnimatePresence>
         {feedbacks.map((feedback) => (
@@ -21,10 +23,7 @@ const FeedbackList = () => {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 100 }}
           >
-            <FeedbackItem
-              key={feedback.id}
-              feedback={feedback}
-            />
+            <FeedbackItem key={feedback.id} feedback={feedback} />
           </motion.div>
         ))}
       </AnimatePresence>
