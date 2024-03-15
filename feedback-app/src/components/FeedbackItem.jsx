@@ -14,7 +14,7 @@ const FeedbackItem = ({ feedback }) => {
       <button className='close' onClick={() => handleDelete(feedback.id)}>
         <FaTimes color='purple' />
       </button>
-      <button className='edit' onClick={() => handleEdit(feedback)} >
+      <button className='edit' onClick={() => handleEdit(feedback)}>
         <FaEdit color='purple' />
       </button>
       <div className='text-display'>{feedback.text}</div>
