@@ -6,12 +6,12 @@ const FeedbackData = [
   },
   {
     id: 2,
-    rating: 8,
+    rating: 6,
     text: 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, quae.',
   },
   {
     id: 3,
-    rating: 9,
+    rating: 4,
     text: 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, quae.',
   },
   {
