@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { v4 as uuidv4 } from 'uuid'
 import Card from './shared/Card'
 import Button from './shared/Button'
 import RatingSelect from './RatingSelect'
@@ -27,7 +28,7 @@ const FeedbackForm = ({ addFeedback }) => {
     e.preventDefault()
     if (text.trim().length > 10) {
       const newFeedback = {
-        id: Date.now(),
+        id: uuidv4(),
         rating,
         text,
       }
