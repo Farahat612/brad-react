@@ -26,7 +26,7 @@ const FeedbackForm = () => {
     <Card>
       <form>
         <h2>How would you rate us?</h2>
-        <RatingSelect rating={rating} setRating={setRating} />
+        <RatingSelect selected={rating} setSelected={setRating} />
         <div className='input-group'>
           <input
             value={text}
