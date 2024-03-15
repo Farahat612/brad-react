@@ -1,11 +1,14 @@
-const Header = () => {
+const Header = (text) => {
   return (
     <header>
       <div className='container'>
-        <h2>Feedback App UI</h2>
+        <h2>{text}</h2>
       </div>
     </header>
   )
 }
 
+Header.defaultProps = {
+  text: 'Feedback App UI',
+}
 export default Header
