@@ -11,7 +11,7 @@ const FeedbackForm = () => {
   const [btnDisabled, setBtnDisabled] = useState(true)
   const [message, setMessage] = useState('')
 
-  const { handleAdd, feedbackEdit } = useContext(FeedbackContext)
+  const { handleAdd, feedbackEdit, handleUpdate } = useContext(FeedbackContext)
 
   const handleTextChange = (e) => {
     if (text === '') {
@@ -35,8 +35,15 @@ const FeedbackForm = () => {
         rating,
         text,
       }
-      handleAdd(newFeedback)
-      setText('')
+      if (feedbackEdit.edit) {
+        handleUpdate(feedbackEdit.item.id, newFeedback)
+        setBtnDisabled(true)
+        setText('')
+        
+      } else {
+        handleAdd(newFeedback)
+        setText('')
+      }
     }
   }
 
@@ -49,7 +56,7 @@ const FeedbackForm = () => {
   }, [feedbackEdit])
   return (
     <Card>
-      <form onSubmit={handleSubmit} >
+      <form onSubmit={handleSubmit}>
         <h2>How would you rate us?</h2>
         <RatingSelect selected={rating} setSelected={setRating} />
         <div className='input-group'>
