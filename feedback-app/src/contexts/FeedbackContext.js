@@ -32,6 +32,7 @@ const FeedbackProvider = ({ children }) => {
         handleDelete,
         handleAdd,
         handleEdit,
+        feedbackEdit,
       }}
     >
       {children}
