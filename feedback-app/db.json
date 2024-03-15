@@ -19,11 +19,6 @@
       "id": "4",
       "rating": 10,
       "text": "This is Feedback item 4 - Coming from Backend json-server"
-    },
-    {
-      "id": "b132",
-      "rating": 9,
-      "text": "New Feedback item testing the API"
     }
   ]
 }

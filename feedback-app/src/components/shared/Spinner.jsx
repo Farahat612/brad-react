@@ -7,7 +7,7 @@ const Spinner = () => {
         src={spinner}
         alt='Loading...'
         style={{
-          width: '100px',
+          width: '50px',
           margin: 'auto',
           display: 'block',
         }}
