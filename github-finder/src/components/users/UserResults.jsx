@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import Spinner from '../layout/Spinner'
-
+import UserItem from './UserItem'
 
 const UserResults = () => {
   const [users, setUsers] = useState([])
@@ -28,14 +28,7 @@ const UserResults = () => {
         <Spinner />
       ) : (
         users.map((user) => (
-          <div key={user.id} className='flex flex-col items-center'>
-            <img
-              src={user.avatar_url}
-              alt={user.login}
-              className='w-24 h-24 rounded-full'
-            />
-            <h2 className='mt-4 text-xl font-bold'>{user.login}</h2>
-          </div>
+          <UserItem key={user.id} user={user} />
         ))
       )}
     </div>
