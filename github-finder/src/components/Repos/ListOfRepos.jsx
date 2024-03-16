@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import RepoItem from './RepoItem'
 
-const ReposList = ({ repos }) => {
+const ListOfRepos = ({ repos }) => {
   return (
     <div className='rounded-ls shadow-lg card bg-base-100'>
       <div className='card-body'>
@@ -18,8 +18,8 @@ const ReposList = ({ repos }) => {
   )
 }
 
-ReposList.propTypes = {
+ListOfRepos.propTypes = {
   repos: PropTypes.array.isRequired,
 }
 
-export default ReposList
+export default ListOfRepos
