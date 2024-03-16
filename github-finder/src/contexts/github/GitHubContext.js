@@ -24,19 +24,24 @@ export const GitHubProvider = ({ children }) => {
     })
   }
 
-  // Fetch Users just for testing purposes
-  const fetchUsers = async () => {
+  // Search Users
+  const searchUsers = async (text) => {
     setLoading()
-    const response = await fetch(`${URL}/users`, {
+    const params = new URLSearchParams({
+      q: text,
+      // sort: 'followers',
+      // order: 'desc',
+    })
+    const response = await fetch(`${URL}/search/users?${params}`, {
       method: 'GET',
       headers: {
         Authorization: `token ${TOKEN}`,
       },
     })
-    const data = await response.json()
+    const { items } = await response.json()
     dispatch({
       type: 'GET_USERS',
-      payload: data,
+      payload: items,
     })
   }
 
@@ -45,7 +50,7 @@ export const GitHubProvider = ({ children }) => {
       value={{
         users,
         loading,
-        fetchUsers,
+        searchUsers,
       }}
     >
       {children}
