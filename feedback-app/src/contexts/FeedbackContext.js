@@ -28,7 +28,7 @@ const FeedbackProvider = ({ children }) => {
   // Fetch the feedback data from json-server
   const fetchFeedbackData = async () => {
     const res = await fetch(
-      'http://localhost:8080/feedback?_sort=id&_order=desc'
+      '/feedback?_sort=id&_order=desc'
     )
     const data = await res.json()
     setFeedbacks(data)
