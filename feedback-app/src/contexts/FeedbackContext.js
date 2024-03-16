@@ -6,8 +6,11 @@ const FeedbackProvider = ({ children }) => {
   const [feedbacks, setFeedbacks] = useState([])
   const [isLoading, setIsLoading] = useState(true)
 
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this feedback?')) {
+      await fetch(`/feedback/${id}`, {
+        method: 'DELETE',
+      })
       setFeedbacks(feedbacks.filter((feedback) => feedback.id !== id))
     }
   }
@@ -28,21 +31,18 @@ const FeedbackProvider = ({ children }) => {
     item: {},
     edit: false,
   })
-  
+
   useEffect(() => {
     fetchFeedbackData()
   }, [])
-  
+
   // Fetch the feedback data from json-server
   const fetchFeedbackData = async () => {
-    const res = await fetch(
-      '/feedback?_sort=id&_order=desc'
-    )
+    const res = await fetch('/feedback?_sort=id&_order=desc')
     const data = await res.json()
     setFeedbacks(data)
     setIsLoading(false)
   }
-
 
   // setting the feedback item to be edited
   const handleEdit = (feedback) => {

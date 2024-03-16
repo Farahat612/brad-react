@@ -19,11 +19,6 @@
       "id": "4",
       "rating": 10,
       "text": "This is Feedback item 4 - Coming from Backend json-server"
-    },
-    {
-      "rating": 6,
-      "text": "new review testing backend functionality",
-      "id": "IKrbEO_"
     }
   ]
 }
