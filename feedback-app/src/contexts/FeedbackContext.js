@@ -12,8 +12,16 @@ const FeedbackProvider = ({ children }) => {
     }
   }
 
-  const handleAdd = (newFeedback) => {
-    setFeedbacks([newFeedback, ...feedbacks])
+  const handleAdd = async (newFeedback) => {
+    const res = await fetch('/feedback', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify(newFeedback),
+    })
+    const data = await res.json()
+    setFeedbacks([data, ...feedbacks])
   }
 
   const [feedbackEdit, setFeedbackEdit] = useState({
