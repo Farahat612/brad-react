@@ -1,3 +1,4 @@
+// Code: spinner component to display the spinner whenever the data is loading
 import spinnerImg from '../../assets/spinner.gif'
 
 const Spinner = () => {

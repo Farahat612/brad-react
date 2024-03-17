@@ -1,7 +1,11 @@
-import { FaGithub } from 'react-icons/fa'
+// Code: Navbar component to display the navigation bar
+// Importing the Link component from react-router-dom and the PropTypes
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
+// Importing the FaGithub icon from react-icons/fa
+import { FaGithub } from 'react-icons/fa'
 
+// Creating the Navbar component
 const Navbar = ({ title }) => {
   return (
     <nav className='navbar mb-12 shadow-lg bg-neutral text-white'>
