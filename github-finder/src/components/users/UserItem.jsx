@@ -1,6 +1,9 @@
+// Desc: UserItem component to display user details in search results
+// 1. Importing the needed modules
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
+// 2. Creating the UserItem component
 const UserItem = ({ user: { login, avatar_url } }) => {
   return (
     <div className='card shadow-md compat side bg-base-100 '>
@@ -24,6 +27,7 @@ const UserItem = ({ user: { login, avatar_url } }) => {
   )
 }
 
+// 3. Adding prop types for the UserItem component
 UserItem.propTypes = {
   user: PropTypes.object.isRequired,
 }

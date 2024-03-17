@@ -1,25 +1,32 @@
+// Desc: UserSearch component to search for users
+// Importing the needed hooks, contexts, and actions
 import { useState, useContext } from 'react'
 import GitHubContext from '../../contexts/github/GitHubContext'
 import AlertContext from '../../contexts/alert/AlertContext'
-import { searchUsers, clearUsers } from '../../contexts/github/GitHubActions'
+import { searchUsers } from '../../contexts/github/GitHubActions'
 
+// Creating the UserSearch component
 const UserSearch = () => {
+  // Destructuring the needed properties from the GitHubContext and the AlertContext
   const { users, dispatch } = useContext(GitHubContext)
   const { setAlert } = useContext(AlertContext)
 
+  // Creating the text state and the handleChange and handleSubmit functions
   const [text, setText] = useState('')
   const handleChange = (e) => setText(e.target.value)
+  // Creating the handleSubmit function
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (text === '') {
-      setAlert('Please enter something', 'error')
+      setAlert('Please enter something', 'error') // displaying an alert if the search input is empty
     } else {
-      dispatch({ type: 'SET_LOADING' })
-      const users = await searchUsers(text)
-      dispatch({ type: 'GET_USERS', payload: users })
+      dispatch({ type: 'SET_LOADING' }) // setting loading to true
+      const users = await searchUsers(text) // fetching the users from the GitHub API using the searchUsers action
+      dispatch({ type: 'GET_USERS', payload: users }) // Filling the users state in the GitHubContext
       setText('')
     }
   }
+  // Creating the handleClear function for pressing the clear button
   const handleClear = () => {
     dispatch({ type: 'CLEAR_USERS' })
   }

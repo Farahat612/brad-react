@@ -1,10 +1,13 @@
+// Desc: UserResults component to display user search results
+// 1. Importing the needed modules
 import { useContext } from 'react'
-import Spinner from '../layout/Spinner'
-import UserItem from './UserItem'
-
 import GitHubContext from '../../contexts/github/GitHubContext'
+import UserItem from './UserItem' // importing the UserItem component
+import Spinner from '../layout/Spinner'
 
+// 2. Creating the UserResults component
 const UserResults = () => {
+  // Destructuring the needed properties from the GitHubContext
   const { users, loading } = useContext(GitHubContext)
 
   return (
