@@ -1,18 +1,27 @@
+// Desc: User Page component to display user details and repos
+// importing the needed hooks and packages from react and react-router-dom
 import { useEffect, useContext } from 'react'
+import { useParams, Link } from 'react-router-dom'
+// importing the GitHubContext and the getUserAndRepos action
 import GitHubContext from '../contexts/github/GitHubContext'
-import { useParams } from 'react-router-dom'
-
 import { getUserAndRepos } from '../contexts/github/GitHubActions'
-
+// importing the needed icons and assets
 import { FaCodepen, FaStore, FaUserFriends, FaUsers } from 'react-icons/fa'
-import { Link } from 'react-router-dom'
 import Spinner from '../components/layout/Spinner'
+// importing the ListOfRepos component
 import ListOfRepos from '../components/Repos/ListOfRepos'
+
+// Creating the User component
 const User = () => {
+  // 1. Destructuring the needed properties from the GitHubContext
   const { user, loading, repos, dispatch } = useContext(GitHubContext)
+  // 2. Using the useParams hook to get the user login [username] from the URL
   const params = useParams()
+  // 3. Using the useEffect hook to fetch the user and repos data from the GitHub API
   useEffect(() => {
+    // 3.1 setting the loading state to true
     dispatch({ type: 'SET_LOADING' })
+    // 3.2 creating and calling an async function to fetch the user and repos data
     const fetchUserData = async () => {
       const userData = await getUserAndRepos(params.login)
       dispatch({ type: 'GET_USER_AND_REPOS', payload: userData })
@@ -20,6 +29,7 @@ const User = () => {
     fetchUserData()
   }, [dispatch, params.login])
 
+  // 4. Destructuring the needed properties from the user object
   const {
     name,
     type,
@@ -35,11 +45,11 @@ const User = () => {
     public_gists,
     hireable,
   } = user
-
-  if (loading) return <Spinner />
-
+  // 5. Creating the websiteUrl variable to check if the blog property starts with http or not
   const websiteUrl = blog?.startsWith('http') ? blog : 'https://' + blog
 
+  // 6. Returning the User component
+  if (loading) return <Spinner />
   return (
     <>
       <div className='w-full mx-auto lg:w-10/12'>

@@ -1,3 +1,4 @@
+// Desc: 404 Page Not Found Component
 import { FaHome } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 

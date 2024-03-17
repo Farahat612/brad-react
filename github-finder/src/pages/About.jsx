@@ -1,5 +1,4 @@
-import React from 'react'
-
+// Desc: About page component
 const About = () => {
   return (
     <div>
