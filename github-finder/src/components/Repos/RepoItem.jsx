@@ -1,13 +1,13 @@
+// Desc: This file contains the RepoItem component which is used to display the individual repo details in the Repos component.
+
+// importing the PropTypes package from the prop-types library.
 import PropTypes from 'prop-types'
-import {
-  FaEye,
-  Falnfo,
-  FaLink,
-  FaStar,
-  FaUtensils,
-  FaInfo,
-} from 'react-icons/fa'
+// importing the needed fa icons from react-icons
+import { FaEye, FaLink, FaStar, FaUtensils, FaInfo } from 'react-icons/fa'
+
+// Creating the RepoItem component
 const RepoItem = ({ repo }) => {
+  // 1. Destructuring the needed properties from the repo object passed as a prop
   const {
     name,
     description,
@@ -16,8 +16,9 @@ const RepoItem = ({ repo }) => {
     open_issues,
     watchers_count,
     stargazers_count,
-    repo_url,
   } = repo
+
+  // 2. Returning the RepoItem component
   return (
     <div className='mb-2 rounded-md card bg-gray-800 hover:bg-gray-900 cursor-pointer'>
       <div className='card-body'>
@@ -46,6 +47,7 @@ const RepoItem = ({ repo }) => {
   )
 }
 
+// 3. Setting the PropTypes for the RepoItem component
 RepoItem.propTypes = {
   repo: PropTypes.object.isRequired,
 }

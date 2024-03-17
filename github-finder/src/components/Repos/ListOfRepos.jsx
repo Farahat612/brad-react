@@ -1,6 +1,9 @@
+// Desc: List of Repositories Component
+// Importing the RepoItem component and also PropTypes
 import PropTypes from 'prop-types'
 import RepoItem from './RepoItem'
 
+// Creating the ListOfRepos component
 const ListOfRepos = ({ repos }) => {
   return (
     <div className='rounded-ls shadow-lg card bg-base-100'>
@@ -9,6 +12,7 @@ const ListOfRepos = ({ repos }) => {
           Latest Repositories
         </h2>
         <div className='grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
+          {/* Mapping over the list to render RepoItem component for each item in the list */}
           {repos.map((repo) => (
             <RepoItem key={repo.id} repo={repo} />
           ))}
@@ -18,6 +22,7 @@ const ListOfRepos = ({ repos }) => {
   )
 }
 
+// Setting the PropTypes for the ListOfRepos component
 ListOfRepos.propTypes = {
   repos: PropTypes.array.isRequired,
 }
