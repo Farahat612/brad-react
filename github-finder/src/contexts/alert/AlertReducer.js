@@ -1,16 +1,19 @@
+// Desc: Alert Reducer to set and remove the alert
 const alertReducer = (state, action) => {
   switch (action.type) {
-    case "SET_ALERT":
+    // Setting the alert with the message and the type
+    case 'SET_ALERT':
       return {
         alert: action.payload,
-      };
-    case "REMOVE_ALERT":
+      }
+    // Removing the alert
+    case 'REMOVE_ALERT':
       return {
         alert: null,
-      };
+      }
     default:
-      return state;
+      return state
   }
-};
+}
 
-export default alertReducer;
+export default alertReducer
