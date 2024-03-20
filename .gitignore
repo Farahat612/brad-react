@@ -4,6 +4,7 @@
 /node_modules
 /feedback-app/node_modules
 /github-finder/node_modules
+/custom-hooks/node_modules
 /.pnp
 .pnp.js
 
