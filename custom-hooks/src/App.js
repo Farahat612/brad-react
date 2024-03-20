@@ -1,10 +1,10 @@
-import CustomHookExample1 from './components/CustomHookExample1'
+import CustomHookExample2 from './components/CustomHookExample2'
 
 function App() {
   return (
     <div className='App'>
       <h1>Custom Hooks</h1>
-      <CustomHookExample1 />
+      <CustomHookExample2 />
     </div>
   )
 }
