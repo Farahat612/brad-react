@@ -5,6 +5,7 @@
 /feedback-app/node_modules
 /github-finder/node_modules
 /custom-hooks/node_modules
+/house-marketplace/node_modules
 /.pnp
 .pnp.js
 
