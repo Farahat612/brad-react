@@ -1,11 +1,9 @@
-
-
 function App() {
   return (
-    <div className="App">
+    <div className='App'>
       <h1>Custom Hooks</h1>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
