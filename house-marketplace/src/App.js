@@ -7,6 +7,7 @@ import NotFound from './pages/NotFound'
 import Signin from './pages/Signin'
 import Signup from './pages/Signup'
 import ForgotPassword from './pages/ForgotPassword'
+import Navbar from './components/Navbar'
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path='/forgot-password' element={<ForgotPassword />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
+        <Navbar />
       </Router>
      </>
   )
