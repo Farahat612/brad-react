@@ -14,7 +14,6 @@ import { toast } from 'react-toastify'
 import Spinner from '../components/Spinner'
 import ListingItem from '../components/ListingItem'
 
-
 const Category = () => {
   const [listings, setListings] = useState(null)
   const [loading, setLoading] = useState(true)
@@ -37,7 +36,6 @@ const Category = () => {
         // Execute query
         const querySnap = await getDocs(q)
 
-       
         const listings = []
 
         querySnap.forEach((doc) => {
@@ -48,7 +46,6 @@ const Category = () => {
         })
 
         setListings(listings)
-        console.log(listings[0].data)
         setLoading(false)
       } catch (error) {
         toast.error('Could not fetch listings')
@@ -62,9 +59,7 @@ const Category = () => {
     <div className='category'>
       <header>
         <p className='pageHeader'>
-          {categoryName === 'rent'
-            ? 'Places for rent'
-            : 'Places for sale'}
+          {categoryName === 'rent' ? 'Places for rent' : 'Places for sale'}
         </p>
       </header>
 
@@ -86,7 +81,6 @@ const Category = () => {
 
           <br />
           <br />
-          
         </>
       ) : (
         <p>No listings for {categoryName}</p>
