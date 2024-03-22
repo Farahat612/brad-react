@@ -10,7 +10,7 @@ import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
 import { db } from '../firebase.config'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { v4 as uuidv4 } from 'uuid' 
+import { v4 as uuidv4 } from 'uuid'
 import Spinner from '../components/Spinner'
 
 function CreateListing() {
@@ -155,6 +155,14 @@ function CreateListing() {
         )
       })
     }
+
+    const imgUrls = await Promise.all(
+      [...images].map((image) => storeImage(image))
+    ).catch(() => {
+      setLoading(false)
+      toast.error('Images not uploaded')
+      return
+    })
 
     
   }
