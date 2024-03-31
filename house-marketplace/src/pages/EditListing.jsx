@@ -15,7 +15,7 @@ import Spinner from '../components/Spinner'
 
 function EditListing() {
   // eslint-disable-next-line
-  const [geolocationEnabled, setGeolocationEnabled] = useState(false)
+  const [geolocationEnabled, setGeolocationEnabled] = useState(true)
   const [loading, setLoading] = useState(false)
   const [listing, setListing] = useState(false)
   const [formData, setFormData] = useState({
@@ -470,7 +470,7 @@ function EditListing() {
             id='images'
             onChange={onMutate}
             max='6'
-            accept='.jpg,.png,.jpeg, .JPG, .PNG, .JPEG'
+            accept='.jpg,.png,.jpeg'
             multiple
             required
           />
