@@ -1,7 +1,6 @@
 const asyncHandler = require('express-async-handler')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
-
 const User = require('../models/userModel')
 
 // @Function: Generate a token
@@ -96,12 +95,12 @@ const loginUser = asyncHandler(async (req, res) => {
 // @access: Private
 const getUserProfile = asyncHandler(async (req, res) => {
   // Find the user by id
-  const user = await User.findById(req.user._id) // req.user is set in the protect middleware
+  const user = await User.findById(req.user._id) // req.user is set in the protect function in authMiddleware
 
-  // If the user is found, return the user
+  // If the user is found, return the user details
   if (user) {
     res.status(200).json({
-      _id: user._id,
+      id: user._id,
       name: user.name,
       email: user.email,
     })
@@ -112,9 +111,9 @@ const getUserProfile = asyncHandler(async (req, res) => {
 
   // If the user is not found, return an error
   res.status(404)
-
 })
 
+// Exporting the functions to be used in the routes
 module.exports = {
   registerUser,
   loginUser,
