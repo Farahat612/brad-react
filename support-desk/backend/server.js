@@ -11,12 +11,9 @@ connectDB()
 // Initialize Express
 const app = express()
 
-// Middleware
-// Body Parser
+// Body Parser Middleware
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
-// Error Handler Middleware
-app.use(errorHandler)
 
 // Routes
 // Home Route
@@ -26,6 +23,8 @@ app.get('/', (req, res) => {
 // User Routes
 app.use('/api/users', require('./routes/userRoutes'))
 
+// Error Handler Middleware
+app.use(errorHandler)
 
 // Start the server
 app.listen(PORT, () => {
