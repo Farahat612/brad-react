@@ -40,7 +40,6 @@ const registerUser = asyncHandler(async (req, res) => {
       _id: user._id,
       name: user.name,
       email: user.email,
-      isAdmin: user.isAdmin,
     })
   } else {
     res.status(400)
@@ -52,7 +51,33 @@ const registerUser = asyncHandler(async (req, res) => {
 // @route: POST /api/users/login
 // @access: Public
 const loginUser = asyncHandler(async (req, res) => {
-  res.json({ message: 'Login Route' })
+  // Destructuring the email and password from the request body
+  const { email, password } = req.body
+
+  // @Validation: Check if the email and password are provided
+  if (!email || !password) {
+    res.status(400)
+    throw new Error('Please provide email and password')
+  }
+
+  // Find the user by email
+  const user = await User.findOne({ email })
+
+  // Check if the password matches
+  const isMatch = await bcrypt.compare(password, user.password)
+
+  // @Validation: Check if the user exists and the password is correct
+  if (!user || !isMatch) {
+    res.status(401)
+    throw new Error('Invalid credentials')
+  }
+
+  // If the user is found and password is correct, return the user
+  res.status(200).json({
+    _id: user._id,
+    name: user.name,
+    email: user.email,
+  })
 })
 
 module.exports = {
