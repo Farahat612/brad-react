@@ -8,6 +8,8 @@ app.get('/', (req, res) => {
   res.json({ message: 'Welcome to the Spport Desk system' })
 })
 
+
+// Routes
 app.use('/api/users', require('./routes/userRoutes'))
 
 app.listen(PORT, () => {
