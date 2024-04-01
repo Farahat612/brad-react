@@ -48,7 +48,7 @@ const registerUser = asyncHandler(async (req, res) => {
       _id: user._id,
       name: user.name,
       email: user.email,
-      token : generateToken(user._id)
+      token: generateToken(user._id),
     })
   } else {
     res.status(400)
@@ -83,10 +83,11 @@ const loginUser = asyncHandler(async (req, res) => {
 
   // If the user is found and password is correct, return the user
   res.status(200).json({
+    // could send back only the token but for now we are sending the user details as well
     _id: user._id,
     name: user.name,
     email: user.email,
-    token : generateToken(user._id)
+    token: generateToken(user._id),
   })
 })
 
