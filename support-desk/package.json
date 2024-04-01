@@ -1,0 +1,11 @@
+{
+  "name": "support-ticket-app",
+  "version": "1.0.0",
+  "description": "Support tickets system",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mohamed Farahat",
+  "license": "MIT"
+}
