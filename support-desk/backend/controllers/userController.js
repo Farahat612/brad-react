@@ -6,9 +6,9 @@ const registerUser = (req, res) => {
 
   // @Validation: Check if the name, email, and password are provided
   if (!name || !email || !password) {
-    return res.status(400).json({ message: 'Please provide all fields' })
+    res.status(400)
+    throw new Error('Please provide all fields')
   }
-
 
   res.json({ message: 'Register Route' })
 }
