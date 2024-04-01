@@ -91,7 +91,32 @@ const loginUser = asyncHandler(async (req, res) => {
   })
 })
 
+// @desc: Get user profile
+// @route: GET /api/users/profile
+// @access: Private
+const getUserProfile = asyncHandler(async (req, res) => {
+  // Find the user by id
+  const user = await User.findById(req.user._id) // req.user is set in the protect middleware
+
+  // If the user is found, return the user
+  if (user) {
+    res.status(200).json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+    })
+  } else {
+    res.status(404)
+    throw new Error('User not found')
+  }
+
+  // If the user is not found, return an error
+  res.status(404)
+
+})
+
 module.exports = {
   registerUser,
   loginUser,
+  getUserProfile,
 }
