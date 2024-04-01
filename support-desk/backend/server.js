@@ -5,9 +5,10 @@ const PORT = process.env.PORT || 5000
 const app = express()
 
 app.get('/', (req, res) => {
-  res.send('API is running...')
+  res.json({ message: 'Welcome to the Spport Desk system' })
 })
 
+app.use('/api/users', require('./routes/userRoutes'))
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`)
