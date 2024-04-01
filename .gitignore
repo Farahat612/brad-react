@@ -6,6 +6,8 @@
 /github-finder/node_modules
 /custom-hooks/node_modules
 /house-marketplace/node_modules
+/support-desk/node_modules
+/support-desk/.env
 /.pnp
 .pnp.js
 
