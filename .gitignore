@@ -8,6 +8,7 @@
 /house-marketplace/node_modules
 /support-desk/node_modules
 /support-desk/.env
+/support-desk/frontend/node_modules
 /.pnp
 .pnp.js
 
