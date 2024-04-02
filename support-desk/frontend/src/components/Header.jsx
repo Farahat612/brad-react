@@ -41,11 +41,9 @@ const Header = () => {
             </>
           ) : (
             <li>
-              <Link to='/logout'>
-                <button className='btn' onClick={handleLogout}>
-                  <FaSignOutAlt /> Logout
-                </button>
-              </Link>
+              <button className='btn' onClick={handleLogout}>
+                <FaSignOutAlt /> Logout
+              </button>
             </li>
           )}
         </ul>
