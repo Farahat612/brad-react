@@ -1,9 +1,13 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import authService from './authService'
 
+// Get User from local storage if it exists
+const user = JSON.parse(localStorage.getItem('user'))
+
+
 // Defining the initial state
 const initialState = {
-  user: null,
+  user: user? user : null,
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -39,7 +43,14 @@ export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
+  reducers: {
+    reset: (state) => {
+      state.isError = false
+      state.isSuccess = false
+      state.isLoading = false
+      state.message = ''
+    },
+  },
   extraReducers: (builder) => {
     builder
       // handling loading state while action is pending
@@ -64,3 +75,6 @@ export const authSlice = createSlice({
 
 // Exporting the auth slice reducer as the default export
 export default authSlice.reducer
+
+// Exporting the reset action
+export const { reset } = authSlice.actions
