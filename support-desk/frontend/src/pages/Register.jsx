@@ -6,6 +6,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { register, reset } from '../features/auth/authSlice'
 import { useNavigate } from 'react-router-dom'
 
+import Spinner from '../components/Spinner'
+
 const Register = () => {
   // initializing Navigate
   const navigate = useNavigate()
@@ -50,6 +52,7 @@ const Register = () => {
     }
   }
 
+  // Handling the side effects for success, error, and user 
   useEffect(() => {
     if (isError) {
       toast.error(message)
@@ -62,6 +65,11 @@ const Register = () => {
     dispatch(reset())
   }, [isSuccess, user, message, isError, navigate, dispatch])
 
+
+  // Rendering the Spinner component while loading
+  if (isLoading) {
+    return <Spinner />
+  }
   return (
     <>
       <section className='heading'>
