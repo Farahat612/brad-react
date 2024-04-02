@@ -35,7 +35,18 @@ export const register = createAsyncThunk(
 
 // Creating an async thunk to handle user login
 export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
-  console.log(user)
+  try {
+    // Dispatching the login action from the auth service
+    return await authService.login(user)
+  } catch (error) {
+    const message =
+      (error.response &&
+        error.response.data &&
+        error.response.data.message) ||
+      error.message ||
+      error.toString()
+    return thunkAPI.rejectWithValue(message)
+  }
 })
 
 // Creating an async thunk to handle user logout
