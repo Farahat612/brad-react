@@ -19,7 +19,12 @@ export const register = createAsyncThunk(
       // Dispatching the register action from the auth service
       return await authService.register(user)
     } catch (error) {
-      const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString()
       return thunkAPI.rejectWithValue(message)
     }
   }
@@ -35,7 +40,26 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {},
-  extraReducers: (builder) => {},
+  extraReducers: (builder) => {
+    builder
+      // handling loading state while action is pending
+      .addCase(register.pending, (state) => {
+        state.isLoading = true
+      })
+      // handling states when action is fulfilled
+      .addCase(register.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.user = action.payload
+      })
+      // handling states when action is rejected
+      .addCase(register.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.user = null
+        state.message = action.payload
+      })
+  },
 })
 
 // Exporting the auth slice reducer as the default export
