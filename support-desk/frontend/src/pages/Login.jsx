@@ -1,9 +1,12 @@
 import { useState } from 'react'
 import { FaSignInAlt } from 'react-icons/fa'
 import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
 
 import { useSelector, useDispatch } from 'react-redux'
-import { login } from '../features/auth/authSlice'
+import { login, reset } from '../features/auth/authSlice'
+
+import Spinner from '../components/Spinner'
 
 const Login = () => {
   // Creating a state variable to store the form data
@@ -38,6 +41,10 @@ const Login = () => {
     const userData = { email, password }
     // Dispatching the login action
     dispatch(login(userData))
+  }
+  // Redndering the Spinner Component conditionally
+  if (isLoading) {
+    return <Spinner />
   }
   return (
     <>
