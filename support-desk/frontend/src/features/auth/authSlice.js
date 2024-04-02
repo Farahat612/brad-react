@@ -4,10 +4,9 @@ import authService from './authService'
 // Get User from local storage if it exists
 const user = JSON.parse(localStorage.getItem('user'))
 
-
 // Defining the initial state
 const initialState = {
-  user: user? user : null,
+  user: user ? user : null,
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -37,6 +36,11 @@ export const register = createAsyncThunk(
 // Creating an async thunk to handle user login
 export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
   console.log(user)
+})
+
+// Creating an async thunk to handle user logout
+export const logout = createAsyncThunk('auth/logout', async () => {
+  await authService.logout()
 })
 
 // Creating an auth slice to hold the user state
