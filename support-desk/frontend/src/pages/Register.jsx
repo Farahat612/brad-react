@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { FaUser } from 'react-icons/fa'
-import {toast} from 'react-toastify'
+import { toast } from 'react-toastify'
 
 const Register = () => {
   // Creating a state variable to store the form data
@@ -22,6 +22,16 @@ const Register = () => {
     }))
   }
 
+  // Creating a function to handle form submission
+  const onSubmit = (e) => {
+    e.preventDefault()
+    if (password !== password2) {
+      toast.error('Passwords do not match')
+    } else {
+      console.log(formData)
+    }
+  }
+
   return (
     <>
       <section className='heading'>
@@ -31,7 +41,7 @@ const Register = () => {
         <p>Please create an account</p>
       </section>
 
-      <section className='form'>
+      <section className='form' onSubmit={onSubmit}>
         <form>
           <div className='form-group'>
             <input
@@ -42,6 +52,7 @@ const Register = () => {
               name='name'
               value={name}
               onChange={onChange}
+              required
             />
           </div>
           <div className='form-group'>
@@ -53,6 +64,7 @@ const Register = () => {
               name='email'
               value={email}
               onChange={onChange}
+              required
             />
           </div>
           <div className='form-group'>
@@ -64,6 +76,7 @@ const Register = () => {
               name='password'
               value={password}
               onChange={onChange}
+              required
             />
           </div>
           <div className='form-group'>
@@ -75,6 +88,7 @@ const Register = () => {
               name='password2'
               value={password2}
               onChange={onChange}
+              required
             />
           </div>
           <div className='form-group'>

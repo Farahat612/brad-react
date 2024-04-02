@@ -15,7 +15,6 @@ const App = () => {
       <Router>
         <div className='container '>
           <Header />
-          <ToastContainer />
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/login' element={<Login />} />
@@ -23,6 +22,7 @@ const App = () => {
           </Routes>
         </div>
       </Router>
+      <ToastContainer />
     </>
   )
 }
