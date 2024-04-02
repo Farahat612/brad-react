@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { FaSignInAlt } from 'react-icons/fa'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
@@ -21,8 +21,11 @@ const Login = () => {
   // Accessing the dispatch method
   const dispatch = useDispatch()
 
+  // Initializing Navigate
+  const navigate = useNavigate()
+
   // Accessing the user state from the store using the useSelector hook
-  const { user, isLoading, isSuccess, message } = useSelector(
+  const { user, isLoading, isSuccess, isError, message } = useSelector(
     (state) => state.auth
   )
 
@@ -42,6 +45,21 @@ const Login = () => {
     // Dispatching the login action
     dispatch(login(userData))
   }
+
+  // Handling the side effects for success, error, and user
+  useEffect(() => {
+    // Displaying the error message incase of an error
+    if (isError) {
+      toast.error(message)
+    }
+    // redirect when logged in
+    if (isSuccess || user) {
+      navigate('/')
+    }
+    // Dispatching the reset action
+    dispatch(reset())
+  }, [isError, isSuccess, user, message, dispatch, navigate])
+
   // Redndering the Spinner Component conditionally
   if (isLoading) {
     return <Spinner />
