@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { FaUser } from 'react-icons/fa'
+import {toast} from 'react-toastify'
 
 const Register = () => {
   // Creating a state variable to store the form data
