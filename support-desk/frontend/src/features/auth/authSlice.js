@@ -68,26 +68,43 @@ export const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      // handling loading state while action is pending
+      // handling loading while register action is pending
       .addCase(register.pending, (state) => {
         state.isLoading = true
       })
-      // handling states when action is fulfilled
+      // handling states when register action is fulfilled
       .addCase(register.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
         state.user = action.payload
       })
-      // handling states when action is rejected
+      // handling states when register action is rejected
       .addCase(register.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.user = null
         state.message = action.payload
       })
-      // handling states when logout is fulfilled
+      // handling states when logout action is fulfilled
       .addCase(logout.fulfilled, (state) => {
         state.user = null
+      })
+      // handling loading while login action is pending
+      .addCase(login.pending, (state) => {
+        state.isLoading = true
+      })
+      // handling states when login action is fulfilled
+      .addCase(login.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.user = action.payload
+      })
+      // handling states when login action is rejected
+      .addCase(login.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.user = null
+        state.message = action.payload
       })
   },
 })
