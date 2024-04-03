@@ -150,7 +150,7 @@ export const ticketSlice = createSlice({
         state.message = action.error.message
       })
       // Handling the pending, fulfilled, and rejected cases for the closeTicket async thunk
-      .addCase(closeTicket.fullfilled, (state, action) => {
+      .addCase(closeTicket.fulfilled, (state, action) => {
         state.isLoading = false
         state.tickets.map((ticket) =>
           ticket._id === action.payload._id
