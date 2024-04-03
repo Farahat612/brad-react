@@ -61,6 +61,7 @@ const ticketService = {
   createTicket,
   getTickets,
   getTicketById,
+  closeTicket,
 }
 
 // Exporting the ticket service object
