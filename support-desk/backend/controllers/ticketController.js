@@ -1,6 +1,7 @@
 const asyncHandler = require('express-async-handler')
 const User = require('../models/userModel')
 const Ticket = require('../models/ticketModel')
+const mongoose = require('mongoose')
 
 // @desc: Get all user tickets
 // @route: GET /api/tickets
@@ -47,18 +48,36 @@ const createTicket = asyncHandler(async (req, res) => {
   res.status(201).json(ticket)
 })
 
-// @desc: Get a ticket by ID
+// @desc: Get a user ticket by ID
 // @route: GET /api/tickets/:id
 // @access: Private
 const getTicketById = asyncHandler(async (req, res) => {
+  // Get the logged in user id in the JWT
+  const user = await User.findById(req.user._id)
+  // Check if the user exists
+  if (!user) {
+    res.status(404)
+    throw new Error('User not found')
+  }
+  // Check if the ticket ID is valid
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    res.status(400)
+    throw new Error('Invalid ticket ID')
+  }
+  // Get the ticket by ID
   const ticket = await Ticket.findById(req.params.id)
-
-  if (ticket) {
-    res.json(ticket)
-  } else {
+  // Check if the ticket doesn't exist
+  if (!ticket) {
     res.status(404)
     throw new Error('Ticket not found')
   }
+  // Validate if the ticket belongs to the logged in user
+  if (ticket.user.toString() !== req.user._id.toString()) {
+    res.status(401)
+    throw new Error('Not authorized to view this ticket')
+  }
+  // Send the ticket as response
+  res.json(ticket)
 })
 
 // @desc: Update a ticket
