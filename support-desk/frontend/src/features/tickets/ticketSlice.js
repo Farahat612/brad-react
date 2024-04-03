@@ -113,6 +113,20 @@ export const ticketSlice = createSlice({
         state.isError = true
         state.message = action.error.message
       })
+      // Handling the pending, fulfilled, and rejected cases for the getTicketById async thunk
+      .addCase(getTicketById.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(getTicketById.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.ticket = action.payload
+      })
+      .addCase(getTicketById.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.error.message
+      })
   },
 })
 
