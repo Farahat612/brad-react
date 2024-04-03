@@ -1,14 +1,22 @@
 const asyncHandler = require('express-async-handler')
-const Ticket = require('../models/ticketModel')
 const User = require('../models/userModel')
+const Ticket = require('../models/ticketModel')
 
 // @desc: Get all user tickets
 // @route: GET /api/tickets
 // @access: Private
 const getTickets = asyncHandler(async (req, res) => {
-  // const tickets = await Ticket.find({ user: req.user._id })
-  // res.json(tickets)
-  res.json({ message: 'Get all tickets' })
+  // Get the logged in user id in the JWT
+  const user = await User.findById(req.user._id)
+  // Check if the user exists
+  if (!user) {
+    res.status(404)
+    throw new Error('User not found')
+  }
+  // Get all tickets of the logged in user
+  const tickets = await Ticket.find({ user: req.user._id })
+  // Send the tickets as response
+  res.status(200).json(tickets)
 })
 
 // @desc: Create a new ticket
