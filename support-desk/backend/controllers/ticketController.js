@@ -6,8 +6,9 @@ const User = require('../models/userModel')
 // @route: GET /api/tickets
 // @access: Private
 const getTickets = asyncHandler(async (req, res) => {
-  const tickets = await Ticket.find({ user: req.user._id })
-  res.json(tickets)
+  // const tickets = await Ticket.find({ user: req.user._id })
+  // res.json(tickets)
+  res.json({ message: 'Get all tickets' })
 })
 
 // @desc: Create a new ticket

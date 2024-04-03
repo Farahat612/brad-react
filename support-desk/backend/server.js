@@ -22,6 +22,8 @@ app.get('/', (req, res) => {
 })
 // User Routes
 app.use('/api/users', require('./routes/userRoutes'))
+// Ticket Routes
+app.use('/api/tickets', require('./routes/ticketRoutes'))
 
 // Error Handler Middleware
 app.use(errorHandler)
