@@ -7,6 +7,7 @@ import Home from './pages/Home'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import NewTicket from './pages/NewTicket'
+import Tickets from './pages/Tickets'
 
 import Header from './components/Header'
 import PrivateRoute from './components/PrivateRoute'
@@ -23,6 +24,9 @@ const App = () => {
             <Route path='/register' element={<Register />} />
             <Route path='/new-ticket' element={<PrivateRoute />}>
               <Route index element={<NewTicket />} />
+            </Route>
+            <Route path='/tickets' element={<PrivateRoute />}>
+              <Route index element={<Tickets />} />
             </Route>
           </Routes>
         </div>
