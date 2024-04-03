@@ -11,7 +11,7 @@ const initialState = {
   message: '',
 }
 
-// Creating an async thunk to handle ticket creation
+// Creating an async thunk to handle create ticket requests
 export const createTicket = createAsyncThunk(
   'ticket/create',
   // Defining the action to be dispatched
@@ -21,6 +21,28 @@ export const createTicket = createAsyncThunk(
       const token = thunkAPI.getState().auth.user.token
       // Dispatching the createTicket action from the ticket service
       return await ticketService.createTicket(ticketData, token)
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString()
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+
+// Creating an async thunk to handle get tickets requests
+export const getTickets = createAsyncThunk(
+  'ticket/getAll',
+  // Defining the action to be dispatched
+  async (_, thunkAPI) => {
+    try {
+      // Getting the user token from the state
+      const token = thunkAPI.getState().auth.user.token
+      // Dispatching the getTickets action from the ticket service
+      return await ticketService.getTickets(token)
     } catch (error) {
       const message =
         (error.response &&
