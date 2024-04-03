@@ -19,7 +19,7 @@ const NewTicket = () => {
   })
 
   // Acessing the ticket state from the Redux store
-  const { isErrors, isSuccess, isLoading, message } = useSelector(
+  const { isError, isSuccess, isLoading, message } = useSelector(
     (state) => state.ticket
   )
   // Initalize a dispatch function
@@ -29,7 +29,7 @@ const NewTicket = () => {
 
   // Handle the success and error messages side effects
   useEffect(() => {
-    if (isErrors) {
+    if (isError) {
       toast.error(message)
     }
     if (isSuccess) {
@@ -37,7 +37,7 @@ const NewTicket = () => {
       navigate('/tickets')
     }
     dispatch(reset())
-  }, [isErrors, isSuccess, message, dispatch, navigate])
+  }, [isError, isSuccess, message, dispatch, navigate])
 
   // Handle form submission
   const handleSubmit = (e) => {
