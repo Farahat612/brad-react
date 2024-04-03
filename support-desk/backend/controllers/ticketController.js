@@ -23,21 +23,28 @@ const getTickets = asyncHandler(async (req, res) => {
 // @route: POST /api/tickets
 // @access: Private
 const createTicket = asyncHandler(async (req, res) => {
+  // Get the product and description from the request body
   const { product, description } = req.body
-
+  // Check if the product and description are not provided
   if (!product || !description) {
     res.status(400)
-    throw new Error('Please provide all fields')
+    throw new Error('Please provide a product and a description')
   }
-
-  const ticket = new Ticket({
+  // Get the logged in user id in the JWT
+  const user = await User.findById(req.user._id)
+  // Check if the user exists
+  if (!user) {
+    res.status(404)
+    throw new Error('User not found')
+  }
+  // Create and save a new ticket
+  const ticket = await Ticket.create({
     product,
     description,
     user: req.user._id,
   })
-
-  const createdTicket = await ticket.save()
-  res.status(201).json(createdTicket)
+  // Send the created ticket as response
+  res.status(201).json(ticket)
 })
 
 // @desc: Get a ticket by ID
