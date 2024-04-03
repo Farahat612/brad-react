@@ -7,7 +7,7 @@ const TicketItem = ({ ticket }) => {
       <div>{ticket.product}</div>
       <div className={`status status-${ticket.status}`}>{ticket.status}</div>
       <div>
-        <Link to={`/tickets/${ticket._id}`} className='btn btn-reverse btn-sm'>
+        <Link to={`/ticket/${ticket._id}`} className='btn btn-reverse btn-sm'>
           View Ticket
         </Link>
       </div>
