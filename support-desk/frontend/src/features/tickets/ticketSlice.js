@@ -33,6 +33,7 @@ export const createTicket = createAsyncThunk(
   }
 )
 
+// Creating a ticket slice to hold the user state
 export const ticketSlice = createSlice({
   name: 'ticket',
   initialState,
@@ -41,6 +42,7 @@ export const ticketSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      // Handling the pending, fulfilled, and rejected cases for the createTicket async thunk
       .addCase(createTicket.pending, (state) => {
         state.isLoading = true
       })
@@ -56,5 +58,8 @@ export const ticketSlice = createSlice({
   },
 })
 
-export const { reset } = ticketSlice.actions
+// Exporting the ticket slice reducer as the default export
 export default ticketSlice.reducer
+
+// Exporting the reset action
+export const { reset } = ticketSlice.actions
