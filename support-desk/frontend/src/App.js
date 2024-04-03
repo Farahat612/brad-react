@@ -9,6 +9,7 @@ import Register from './pages/Register'
 import NewTicket from './pages/NewTicket'
 
 import Header from './components/Header'
+import PrivateRoute from './components/PrivateRoute'
 
 const App = () => {
   return (
@@ -20,7 +21,9 @@ const App = () => {
             <Route path='/' element={<Home />} />
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
-            <Route path='/new-ticket' element={<NewTicket />} />
+            <Route path='/new-ticket' element={<PrivateRoute />}>
+              <Route index element={<NewTicket />} />
+            </Route>
           </Routes>
         </div>
       </Router>
