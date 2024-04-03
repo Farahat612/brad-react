@@ -84,21 +84,47 @@ const getTicketById = asyncHandler(async (req, res) => {
 // @route: PUT /api/tickets/:id
 // @access: Private
 const updateTicket = asyncHandler(async (req, res) => {
+  // Get the logged in user id in the JWT
+  const user = await User.findById(req.user._id)
+  // Check if the user exists
+  if (!user) {
+    res.status(404)
+    throw new Error('User not found')
+  }
+  // Check if the ticket ID is valid
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    res.status(400)
+    throw new Error('Invalid ticket ID')
+  }
+  // Get the product, description, and status from the request body
   const { product, description, status } = req.body
-
+  // Check if the product and description are not provided
+  if (!product && !description) {
+    res.status(400)
+    throw new Error('Please provide a product and a description')
+  }
+  // Get the ticket by ID
   const ticket = await Ticket.findById(req.params.id)
-
-  if (ticket) {
-    ticket.product = product
-    ticket.description = description
-    ticket.status = status
-
-    const updatedTicket = await ticket.save()
-    res.json(updatedTicket)
-  } else {
+  // Check if the ticket doesn't exist
+  if (!ticket) {
     res.status(404)
     throw new Error('Ticket not found')
   }
+  // Validate if the ticket belongs to the logged in user
+  if (ticket.user.toString() !== req.user._id.toString()) {
+    res.status(401)
+    throw new Error('Not authorized to update this ticket')
+  }
+  // Update the ticket
+  const updatedTicket = await Ticket.findByIdAndUpdate(
+    req.params.id,
+    req.body,
+    {
+      new: true,
+    }
+  )
+  // Send the updated ticket as response
+  res.json(updatedTicket)
 })
 
 // @desc: Delete a ticket
