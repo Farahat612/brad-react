@@ -40,6 +40,18 @@ const getTicketById = async (ticketId, token) => {
   return response.data
 }
 
+// Close a ticket
+const closeTicket = async (ticketId, token) => {
+  // Setting the request headers with the user token
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+  const response = await axios.patch(`${API_URL}${ticketId}`, {}, config)
+  return response.data
+}
+
 // Updating a ticket by ID
 
 // Deleting a ticket by ID
