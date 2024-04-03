@@ -11,8 +11,7 @@ const {
 } = require('../controllers/ticketController')
 
 // Tickets Routes
-router.route('/').post(protect, createTicket)
-router.route('/').get(protect, getTickets)
+router.route('/').get(protect, getTickets).post(protect, createTicket)
 router.route('/:id').get(protect, getTicketById)
 router.route('/:id').put(protect, updateTicket)
 router.route('/:id').delete(protect, deleteTicket)
