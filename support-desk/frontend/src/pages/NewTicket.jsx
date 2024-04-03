@@ -14,6 +14,17 @@ const NewTicket = () => {
     description: '',
   })
 
+  // Handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    // Check if the description is empty
+    if (!ticket.description) {
+      return toast.error('Please provide a description')
+    }
+    // Create a new ticket
+    console.log(ticket)
+  }
+
   return (
     <>
       <section className='heading'>
@@ -43,7 +54,7 @@ const NewTicket = () => {
             disabled
           />
         </div>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className='form-group'>
             <label htmlFor='product'>Product</label>
             <select
@@ -62,6 +73,8 @@ const NewTicket = () => {
           <div className='form-group'>
             <label htmlFor='description'>Description</label>
             <textarea
+              className='form-control'
+              placeholder='description...'
               id='description'
               name='description'
               value={ticket.description}
@@ -70,7 +83,9 @@ const NewTicket = () => {
               }
             ></textarea>
           </div>
-          <button type='submit'>Submit</button>
+          <div className='form-group'>
+            <button type='submit' className='btn btn-block'>Create</button>
+          </div>
         </form>
       </section>
     </>
