@@ -20,7 +20,7 @@ const NewTicket = () => {
 
   // Acessing the ticket state from the Redux store
   const { isError, isSuccess, isLoading, message } = useSelector(
-    (state) => state.ticket
+    (state) => state.tickets
   )
   // Initalize a dispatch function
   const dispatch = useDispatch()

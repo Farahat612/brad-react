@@ -4,6 +4,7 @@ import { getTickets, reset } from '../features/tickets/ticketSlice'
 import { Link } from 'react-router-dom'
 import Spinner from '../components/Spinner'
 import BackButton from '../components/BackButton'
+import TicketItem from '../components/TicketItem'
 
 const Tickets = () => {
   // Getting the ticket state from the store
@@ -35,7 +36,7 @@ const Tickets = () => {
 
   return (
     <>
-      <BackButton />
+      <BackButton url='/' />
       <h1>Tickets</h1>
       <div className='tickets'>
         <div className='ticket-headings'>
@@ -45,16 +46,7 @@ const Tickets = () => {
           <div></div>
         </div>
         {tickets.map((ticket) => (
-          <div key={ticket._id} className='ticket'>
-            <div>{new Date(ticket.createdAt).toLocaleString()}</div>
-            <div>{ticket.product}</div>
-            <div>{ticket.status}</div>
-            <div>
-              <Link to={`/tickets/${ticket._id}`}>
-                <button className='btn'>View</button>
-              </Link>
-            </div>
-          </div>
+          <TicketItem key={ticket._id} ticket={ticket} />
         ))}
       </div>
     </>
