@@ -50,6 +50,20 @@ const NewTicket = () => {
     dispatch(createTicket(ticket))
   }
 
+  // Products list from The Model
+  const products = [
+    'iPhone',
+    'iPad',
+    'MacBook',
+    'Apple Watch',
+    'iMac',
+    'AirPods',
+    'Apple TV',
+    'HomePod',
+    'Mac Pro',
+    'Mac Mini',
+  ]
+
   // Display a spinner while the ticket is being created
   if (isLoading) {
     return <Spinner />
@@ -96,9 +110,11 @@ const NewTicket = () => {
                 setTicket({ ...ticket, product: e.target.value })
               }
             >
-              <option value='product1'>Product 1</option>
-              <option value='product2'>Product 2</option>
-              <option value='product3'>Product 3</option>
+              {products.map((product) => (
+                <option key={product} value={product}>
+                  {product}
+                </option>
+              ))}
             </select>
           </div>
           <div className='form-group'>
