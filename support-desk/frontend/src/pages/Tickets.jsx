@@ -6,7 +6,9 @@ import BackButton from '../components/BackButton'
 
 const Tickets = () => {
   // Getting the ticket state from the store
-  const { tickets, isLoading, isSuccess } = useSelector((state) => state.ticket)
+  const { tickets, isLoading, isSuccess } = useSelector(
+    (state) => state.tickets
+  )
 
   // Initializing the dispatch
   const dispatch = useDispatch()
