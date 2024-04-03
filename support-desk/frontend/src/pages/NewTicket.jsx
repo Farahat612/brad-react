@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { createTicket, reset } from '../features/tickets/ticketSlice' // Import the createTicket action
 import Spinner from '../components/Spinner'
-
+import BackButton from '../components/BackButton'
 
 const NewTicket = () => {
   // Get the user from the Redux store
@@ -57,6 +57,7 @@ const NewTicket = () => {
 
   return (
     <>
+      <BackButton url='/' />
       <section className='heading'>
         <h1>New Ticket</h1>
         <p>Please fill out the form below</p>
