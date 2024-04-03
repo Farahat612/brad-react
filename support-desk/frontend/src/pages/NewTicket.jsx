@@ -14,7 +14,7 @@ const NewTicket = () => {
   const [email] = useState(user.email)
   // Create the ticket state
   const [ticket, setTicket] = useState({
-    product: 'product1',
+    product: 'iPhone',
     description: '',
   })
 
