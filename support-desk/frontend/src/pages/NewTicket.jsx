@@ -1,6 +1,10 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { toast } from 'react-toastify'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { createTicket, reset } from '../features/tickets/ticketSlice' // Import the createTicket action
+import Spinner from '../components/Spinner'
+
 
 const NewTicket = () => {
   // Get the user from the Redux store
@@ -14,6 +18,27 @@ const NewTicket = () => {
     description: '',
   })
 
+  // Acessing the ticket state from the Redux store
+  const { isErrors, isSuccess, isLoading, message } = useSelector(
+    (state) => state.ticket
+  )
+  // Initalize a dispatch function
+  const dispatch = useDispatch()
+  // Initalize a navigate function
+  const navigate = useNavigate()
+
+  // Handle the success and error messages side effects
+  useEffect(() => {
+    if (isErrors) {
+      toast.error(message)
+    }
+    if (isSuccess) {
+      dispatch(reset())
+      navigate('/tickets')
+    }
+    dispatch(reset())
+  }, [isErrors, isSuccess, message, dispatch, navigate])
+
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -21,8 +46,13 @@ const NewTicket = () => {
     if (!ticket.description) {
       return toast.error('Please provide a description')
     }
-    // Create a new ticket
-    console.log(ticket)
+    // Create a new ticket using the createTicket action
+    dispatch(createTicket(ticket))
+  }
+
+  // Display a spinner while the ticket is being created
+  if (isLoading) {
+    return <Spinner />
   }
 
   return (
@@ -84,7 +114,9 @@ const NewTicket = () => {
             ></textarea>
           </div>
           <div className='form-group'>
-            <button type='submit' className='btn btn-block'>Create</button>
+            <button type='submit' className='btn btn-block'>
+              Create
+            </button>
           </div>
         </form>
       </section>
