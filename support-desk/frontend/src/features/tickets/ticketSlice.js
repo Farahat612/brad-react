@@ -55,6 +55,28 @@ export const getTickets = createAsyncThunk(
   }
 )
 
+// Creating an async thunk to handle get ticket by ID requests
+export const getTicketById = createAsyncThunk(
+  'ticket/getById',
+  // Defining the action to be dispatched
+  async (ticketId, thunkAPI) => {
+    try {
+      // Getting the user token from the state
+      const token = thunkAPI.getState().auth.user.token
+      // Dispatching the getTicketById action from the ticket service
+      return await ticketService.getTicketById(ticketId, token)
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString()
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+
 // Creating a ticket slice to hold the user state
 export const ticketSlice = createSlice({
   name: 'ticket',
