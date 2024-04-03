@@ -16,9 +16,28 @@ const createTicket = async (ticketData, token) => {
   return response.data
 }
 
+// Getting all tickets
+const getTickets = async (token) => {
+  // Setting the request headers with the user token
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+  const response = await axios.get(API_URL, config)
+  return response.data
+}
+
+// Getting a ticket by ID
+
+// Updating a ticket by ID
+
+// Deleting a ticket by ID
+
 // Creating an object to hold the ticket service functions
 const ticketService = {
   createTicket,
+  getTickets,
 }
 
 // Exporting the ticket service object
