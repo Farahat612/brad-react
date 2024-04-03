@@ -12,8 +12,10 @@ const {
 
 // Tickets Routes
 router.route('/').get(protect, getTickets).post(protect, createTicket)
-router.route('/:id').get(protect, getTicketById)
-router.route('/:id').put(protect, updateTicket)
-router.route('/:id').delete(protect, deleteTicket)
+router
+  .route('/:id')
+  .get(protect, getTicketById)
+  .put(protect, updateTicket)
+  .delete(protect, deleteTicket)
 
 module.exports = router
