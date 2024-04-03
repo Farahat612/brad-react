@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getTickets, reset } from '../features/tickets/ticketSlice'
+import { Link } from 'react-router-dom'
 import Spinner from '../components/Spinner'
 import BackButton from '../components/BackButton'
 
@@ -33,9 +34,30 @@ const Tickets = () => {
   }
 
   return (
-    <div>
+    <>
+      <BackButton />
       <h1>Tickets</h1>
-    </div>
+      <div className='tickets'>
+        <div className='ticket-headings'>
+          <div>Date</div>
+          <div>Product</div>
+          <div>Status</div>
+          <div></div>
+        </div>
+        {tickets.map((ticket) => (
+          <div key={ticket._id} className='ticket'>
+            <div>{new Date(ticket.createdAt).toLocaleString()}</div>
+            <div>{ticket.product}</div>
+            <div>{ticket.status}</div>
+            <div>
+              <Link to={`/tickets/${ticket._id}`}>
+                <button className='btn'>View</button>
+              </Link>
+            </div>
+          </div>
+        ))}
+      </div>
+    </>
   )
 }
 
