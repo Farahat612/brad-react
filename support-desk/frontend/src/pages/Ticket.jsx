@@ -15,7 +15,7 @@ import NoteItem from '../components/NoteItem'
 
 const Ticket = () => {
   // Accessing the ticket state from the store
-  const { ticket, isLoading, isError, isSuccess, message } = useSelector(
+  const { ticket, isLoading, isError, message } = useSelector(
     (state) => state.tickets
   )
 
