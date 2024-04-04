@@ -18,7 +18,7 @@ const Tickets = () => {
   }, [dispatch])
 
   // Displaying the loading spinner while fetching the tickets
-  if (isLoading) {
+  if (isLoading || !tickets) {
     return <Spinner />
   }
 
