@@ -90,6 +90,7 @@ const Ticket = () => {
                   {new Date(note.createdAt).toLocaleString()}
                 </p>
               </li>
+              // <NoteItem key={note._id} note={note} />
             ))}
           </ul>
         </div>
