@@ -79,7 +79,15 @@ const Ticket = () => {
   // Open and close Modal
   const openModal = () => setIsModalOpen(true)
   const closeModal = () => setIsModalOpen(false)
-
+  // Handling note submit
+  const handleNoteSubmit = (e) => {
+    e.preventDefault()
+    // Add the note
+    // Close the modal
+    // Clear the note content
+    closeModal()
+    setNoteContent('')
+  }
 
   // Displaying a spinner while the ticket is being fetched
   if (isLoading || notesIsLoading) {
@@ -114,10 +122,7 @@ const Ticket = () => {
       </header>
       {/* Button to add a new note */}
       {ticket.status !== 'closed' && (
-        <button
-          className='btn'
-          onClick={openModal}
-        >
+        <button className='btn' onClick={openModal}>
           <FaPlus /> Add Note
         </button>
       )}
@@ -129,8 +134,10 @@ const Ticket = () => {
         contentLabel='Create Note'
       >
         <h2>Add Note</h2>
-        <button className="btn-close" onClick={closeModal}>X</button>
-        <form>
+        <button className='btn-close' onClick={closeModal}>
+          X
+        </button>
+        <form onSubmit={handleNoteSubmit}>
           <div className='form-group'>
             <label htmlFor='noteContent'>Note Content</label>
             <textarea
@@ -142,31 +149,11 @@ const Ticket = () => {
               onChange={(e) => setNoteContent(e.target.value)}
             ></textarea>
           </div>
-          <button
-            className='btn btn-primary'
-            onClick={(e) => {
-              e.preventDefault()
-              // Add the note
-              // Close the modal
-              // Clear the note content
-              closeModal()
-              setNoteContent('')
-            }}
-          >
-            Add Note
-          </button>
-          <button
-            className='btn btn-secondary'
-            onClick={(e) => {
-              e.preventDefault()
-              // Close the modal
-              // Clear the note content
-              closeModal()
-              setNoteContent('')
-            }}
-          >
-            Cancel
-          </button>
+          <div className='form-group'>
+            <button className='btn btn-primary' type='submit'>
+              Add Note
+            </button>
+          </div>
         </form>
       </Modal>
 
