@@ -108,7 +108,7 @@ const Ticket = () => {
             {ticket.status}
           </span>
         </h2>
-        <h3>Date Submitted :{new Date(ticket.createdAt).toLocaleString()}</h3>
+        <h3>Date Submitted : {new Date(ticket.createdAt).toLocaleString()}</h3>
         <h3>Product: {ticket.product}</h3>
         <hr />
         <div className='ticket-desc'>
