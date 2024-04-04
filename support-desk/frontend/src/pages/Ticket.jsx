@@ -1,17 +1,34 @@
 import { useSelector, useDispatch } from 'react-redux'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import { Modal } from 'react-modal'
 import {
   getTicketById,
   reset,
   closeTicket,
 } from '../features/tickets/ticketSlice'
-import { getNotes, reset as notesReset } from '../features/notes/noteSlice'
+import { getNotes } from '../features/notes/noteSlice'
 
 import BackButton from '../components/BackButton'
 import Spinner from '../components/Spinner'
 import NoteItem from '../components/NoteItem'
+
+// Defining custom styles for the modal
+const customStyles = {
+  content: {
+    width: '600px',
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+    position: 'relative',
+  },
+}
+// Setting the app element for the modal
+Modal.setAppElement('#root')
 
 const Ticket = () => {
   // Accessing the ticket state from the store
@@ -46,23 +63,30 @@ const Ticket = () => {
     }
   }, [dispatch, ticketId, isError, message])
 
-  // Displaying a spinner while the ticket is being fetched
-  if (isLoading || notesIsLoading) {
-    return <Spinner />
-  }
-
-  // Displaying an error message if the ticket fetching fails
-  if (isError) {
-    return <h3>Something went wrong!</h3>
-  }
-
+  
   // Closing the ticket
   const onTicketClose = async () => {
     dispatch(closeTicket(ticketId))
     toast.success('Ticket closed successfully!')
     navigate('/tickets')
   }
+  
+  // ---------------- Create Note Modal Functionality -------------------
+  // Defining the state variables for the modal
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [noteContent, setNoteContent] = useState('')
 
+
+  
+  // Displaying a spinner while the ticket is being fetched
+  if (isLoading || notesIsLoading) {
+    return <Spinner />
+  }
+  // Displaying an error message if the ticket fetching fails
+  if (isError) {
+    return <h3>Something went wrong!</h3>
+  }
+  // Displaying the ticket details
   return (
     <div className='ticket-page'>
       <header className='ticket-header'>
