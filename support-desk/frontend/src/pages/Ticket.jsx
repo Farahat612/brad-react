@@ -7,6 +7,7 @@ import {
   reset,
   closeTicket,
 } from '../features/tickets/ticketSlice'
+import { getNotes, reset as notesReset } from '../features/notes/noteSlice'
 
 import BackButton from '../components/BackButton'
 import Spinner from '../components/Spinner'
@@ -15,6 +16,11 @@ const Ticket = () => {
   // Accessing the ticket state from the store
   const { ticket, isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.tickets
+  )
+
+  // Accessing the notes state from the store
+  const { notes, isLoading: notesIsLoading } = useSelector(
+    (state) => state.notes
   )
 
   // Getting the dispatch function from the useDispatch hook
@@ -32,6 +38,7 @@ const Ticket = () => {
       toast.error(message)
     }
     dispatch(getTicketById(ticketId))
+    dispatch(getNotes(ticketId))
     // Resetting the ticket state when the component unmounts
     return () => {
       dispatch(reset())
@@ -39,7 +46,7 @@ const Ticket = () => {
   }, [dispatch, ticketId, isError, message])
 
   // Displaying a spinner while the ticket is being fetched
-  if (isLoading) {
+  if (isLoading || notesIsLoading) {
     return <Spinner />
   }
 
@@ -71,6 +78,20 @@ const Ticket = () => {
         <div className='ticket-desc'>
           <h3>Description of Issue</h3>
           <p> {ticket.description} </p>
+        </div>
+        <hr />
+        <div className='ticket-notes'>
+          <h3>Notes</h3>
+          <ul>
+            {notes.map((note) => (
+              <li key={note._id}>
+                <p>{note.content}</p>
+                <p className='note-date'>
+                  {new Date(note.createdAt).toLocaleString()}
+                </p>
+              </li>
+            ))}
+          </ul>
         </div>
       </header>
 
