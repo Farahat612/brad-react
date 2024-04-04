@@ -2,7 +2,9 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { Modal } from 'react-modal'
+import Modal from 'react-modal'
+import { FaPlus } from 'react-icons/fa'
+
 import {
   getTicketById,
   reset,
@@ -63,21 +65,22 @@ const Ticket = () => {
     }
   }, [dispatch, ticketId, isError, message])
 
-  
   // Closing the ticket
   const onTicketClose = async () => {
     dispatch(closeTicket(ticketId))
     toast.success('Ticket closed successfully!')
     navigate('/tickets')
   }
-  
+
   // ---------------- Create Note Modal Functionality -------------------
   // Defining the state variables for the modal
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [noteContent, setNoteContent] = useState('')
+  // Open and close Modal
+  const openModal = () => setIsModalOpen(true)
+  const closeModal = () => setIsModalOpen(false)
 
 
-  
   // Displaying a spinner while the ticket is being fetched
   if (isLoading || notesIsLoading) {
     return <Spinner />
@@ -109,6 +112,65 @@ const Ticket = () => {
           <h3>Notes</h3>
         </div>
       </header>
+      {/* Button to add a new note */}
+      {ticket.status !== 'closed' && (
+        <button
+          className='btn'
+          onClick={openModal}
+        >
+          <FaPlus /> Add Note
+        </button>
+      )}
+      {/* Create Note Modal */}
+      <Modal
+        isOpen={isModalOpen}
+        onRequestClose={closeModal}
+        style={customStyles}
+        contentLabel='Create Note'
+      >
+        <h2>Add Note</h2>
+        <button className="btn-close" onClick={closeModal}>X</button>
+        <form>
+          <div className='form-group'>
+            <label htmlFor='noteContent'>Note Content</label>
+            <textarea
+              id='noteContent'
+              name='noteContent'
+              className='form-control'
+              placeholder='Enter note content...'
+              value={noteContent}
+              onChange={(e) => setNoteContent(e.target.value)}
+            ></textarea>
+          </div>
+          <button
+            className='btn btn-primary'
+            onClick={(e) => {
+              e.preventDefault()
+              // Add the note
+              // Close the modal
+              // Clear the note content
+              closeModal()
+              setNoteContent('')
+            }}
+          >
+            Add Note
+          </button>
+          <button
+            className='btn btn-secondary'
+            onClick={(e) => {
+              e.preventDefault()
+              // Close the modal
+              // Clear the note content
+              closeModal()
+              setNoteContent('')
+            }}
+          >
+            Cancel
+          </button>
+        </form>
+      </Modal>
+
+      {/* Displaying the notes */}
       {notes.map((note) => (
         <NoteItem key={note._id} note={note} />
       ))}
