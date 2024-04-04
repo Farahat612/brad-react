@@ -10,7 +10,7 @@ import {
   reset,
   closeTicket,
 } from '../features/tickets/ticketSlice'
-import { getNotes } from '../features/notes/noteSlice'
+import { getNotes, createNote } from '../features/notes/noteSlice'
 
 import BackButton from '../components/BackButton'
 import Spinner from '../components/Spinner'
@@ -82,9 +82,9 @@ const Ticket = () => {
   // Handling note submit
   const handleNoteSubmit = (e) => {
     e.preventDefault()
-    // Add the note
-    // Close the modal
-    // Clear the note content
+    // dispatching createNote
+    dispatch(createNote({ noteContent, ticketId }))
+    // Closing Modal
     closeModal()
     setNoteContent('')
   }
