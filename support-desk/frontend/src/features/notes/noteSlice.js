@@ -18,7 +18,7 @@ export const getNotes = createAsyncThunk(
     try {
       // Getting the user token from the state
       const token = thunkAPI.getState().auth.user.token
-      // Dispatching the getTickets action from the ticket service
+      // Dispatching the getNotes action from the noteService
       return await noteService.getNotes(ticketId, token)
     } catch (error) {
       const message =
@@ -40,7 +40,23 @@ const noteSlice = createSlice({
     // Reducer to reset the state
     reset: (state) => initialState,
   },
-  extraReducers: (builder) => {},
+  extraReducers: (builder) => {
+    builder
+      // Handling the pending, fulfilled, and rejected cases for the getNotes async thunk
+      .addCase(getNotes.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(getNotes.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.notes = action.payload
+      })
+      .addCase(getNotes.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.error.message
+      })
+  },
 })
 
 // Exporting the noteSlice reducer as the default export
