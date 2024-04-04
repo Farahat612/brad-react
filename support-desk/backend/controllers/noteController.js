@@ -10,19 +10,19 @@ const Ticket = require('../models/ticketModel')
 // @access  Private
 const getNotes = asyncHandler(async (req, res) => {
   // Get the logged in user id in the JWT
-  const user = await User.findById(req.user._id)
+  const user = await User.findById(req.user.id)
   // Check if the user exists
   if (!user) {
     res.status(404)
     throw new Error('User not found')
   }
   // Check if the ticket ID is valid
-  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+  if (!mongoose.Types.ObjectId.isValid(req.params.ticketId)) {
     res.status(400)
     throw new Error('Invalid ticket ID')
   }
   // Get the ticket by ID
-  const ticket = await Ticket.findById(req.params.id)
+  const ticket = await Ticket.findById(req.params.ticketId)
   // Check if the ticket doesn't exist
   if (!ticket) {
     res.status(404)
