@@ -11,6 +11,7 @@ import { getNotes, reset as notesReset } from '../features/notes/noteSlice'
 
 import BackButton from '../components/BackButton'
 import Spinner from '../components/Spinner'
+import NoteItem from '../components/NoteItem'
 
 const Ticket = () => {
   // Accessing the ticket state from the store
@@ -79,23 +80,14 @@ const Ticket = () => {
           <h3>Description of Issue</h3>
           <p> {ticket.description} </p>
         </div>
-        <hr />
+
         <div className='ticket-notes'>
           <h3>Notes</h3>
-          <ul>
-            {notes.map((note) => (
-              <li key={note._id}>
-                <p>{note.content}</p>
-                <p className='note-date'>
-                  {new Date(note.createdAt).toLocaleString()}
-                </p>
-              </li>
-              // <NoteItem key={note._id} note={note} />
-            ))}
-          </ul>
         </div>
       </header>
-
+      {notes.map((note) => (
+        <NoteItem key={note._id} note={note} />
+      ))}
       {ticket.status !== 'closed' && (
         <button className='btn btn-block btn-danger' onClick={onTicketClose}>
           Close Ticket

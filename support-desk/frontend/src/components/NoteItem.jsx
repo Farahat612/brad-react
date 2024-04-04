@@ -1,4 +1,4 @@
-import { useSelector } from '@reduxjs/toolkit'
+import { useSelector } from 'react-redux'
 
 const NoteItem = ({ note }) => {
   const { user } = useSelector((state) => state.auth)
